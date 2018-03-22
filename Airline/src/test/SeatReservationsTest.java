@@ -32,4 +32,39 @@ public class SeatReservationsTest {
         assertThat(result, equalTo(2));
     }
 
+    @Test
+    public void testOneRow_Seat1K_ReservedShouldReturnTwo() {
+        int result = noOfAvailableThreeTogether(1, "1K");
+
+        assertThat(result, equalTo(2));
+    }
+
+    @Test
+    public void testOneRow_Seat1E_ReservedShouldReturnTwo() {
+        int result = noOfAvailableThreeTogether(1, "1E");
+
+        assertThat(result, equalTo(2));
+    }
+
+    @Test
+    public void testOneRow_Seat1F_ReservedShouldReturnTwo() {
+        int result = noOfAvailableThreeTogether(1, "1F");
+
+        assertThat(result, equalTo(2));
+    }
+
+    @Test
+    public void testOneRow_Seats1A_1K_ReservedShouldReturnOne() {
+
+        int result = noOfAvailableThreeTogether(1, "1A 1K");
+
+        assertThat(result, equalTo(1));
+    }
+
+    @Test
+    public void testOneRow_Seat1D_ReservedShouldReturnThree() {
+        int result = noOfAvailableThreeTogether(1, "1D");
+
+        assertThat(result, equalTo(3));
+    }
 }
