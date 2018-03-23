@@ -1,6 +1,6 @@
 package test;
 
-import static main.SeatReservations.noOfAvailableThreeTogether;
+import static main.Solution.solution;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -11,7 +11,7 @@ public class SeatReservationsTest {
     @Test
     public void testOneRowNoReservedShouldReturnThree() {
 
-        int result = noOfAvailableThreeTogether(1,"");
+        int result = solution(1,"");
 
         assertThat(result, equalTo(3));
     }
@@ -19,7 +19,7 @@ public class SeatReservationsTest {
     @Test
     public void testTwoRowsNoReservedShouldReturnSix() {
 
-        int result = noOfAvailableThreeTogether(2, "");
+        int result = solution(2, "");
 
         assertThat(result, equalTo(6));
     }
@@ -27,28 +27,28 @@ public class SeatReservationsTest {
     @Test
     public void testOneRow_Seat1A_ReservedShouldReturnTwo() {
 
-        int result = noOfAvailableThreeTogether(1, "1A");
+        int result = solution(1, "1A");
 
         assertThat(result, equalTo(2));
     }
 
     @Test
     public void testOneRow_Seat1K_ReservedShouldReturnTwo() {
-        int result = noOfAvailableThreeTogether(1, "1K");
+        int result = solution(1, "1K");
 
         assertThat(result, equalTo(2));
     }
 
     @Test
     public void testOneRow_Seat1E_ReservedShouldReturnTwo() {
-        int result = noOfAvailableThreeTogether(1, "1E");
+        int result = solution(1, "1E");
 
         assertThat(result, equalTo(2));
     }
 
     @Test
     public void testOneRow_Seat1F_ReservedShouldReturnTwo() {
-        int result = noOfAvailableThreeTogether(1, "1F");
+        int result = solution(1, "1F");
 
         assertThat(result, equalTo(2));
     }
@@ -56,15 +56,57 @@ public class SeatReservationsTest {
     @Test
     public void testOneRow_Seats1A_1K_ReservedShouldReturnOne() {
 
-        int result = noOfAvailableThreeTogether(1, "1A 1K");
+        int result = solution(1, "1A 1K");
 
         assertThat(result, equalTo(1));
     }
 
     @Test
     public void testOneRow_Seat1D_ReservedShouldReturnThree() {
-        int result = noOfAvailableThreeTogether(1, "1D");
+        int result = solution(1, "1D");
 
         assertThat(result, equalTo(3));
+    }
+
+    @Test
+    public void testOneRow_Seat1E_1C_1J_ReservedShouldReturnZero() {
+        int result = solution(1,"1E 1C 1J");
+
+        assertThat(result, equalTo(0));
+    }
+
+    @Test
+    public void testTwoRows_Seat1A_ReservedShouldReturnFive() {
+        int result = solution(2,"1A");
+
+        assertThat(result, equalTo(5));
+    }
+
+    @Test
+    public void testTwoRows_Seat1A_2A_ReservedShouldReturnFour() {
+        int result = solution(2,"1A 2A");
+
+        assertThat(result, equalTo(4));
+    }
+
+    @Test
+    public void testTwoRows_Seat1E_ReservedShouldReturnFive() {
+        int result = solution(2,"1E");
+
+        assertThat(result, equalTo(5));
+    }
+
+    @Test
+    public void testTwoRows_Seat1J_ReservedShouldReturnFive() {
+        int result = solution(2,"1J");
+
+        assertThat(result, equalTo(5));
+    }
+
+    @Test
+    public void testTwoRows_Seat1A_2F_1C_ReservedShouldReturnFour() {
+        int result = solution(2,"1A 2F 1C");
+
+        assertThat(result, equalTo(4));
     }
 }
