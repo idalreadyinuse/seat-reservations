@@ -4,6 +4,8 @@ import static main.Solution.solution;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import exceptions.CustomException;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class SeatReservationsTest {
@@ -28,6 +30,14 @@ public class SeatReservationsTest {
     public void testOneRow_Seat1A_ReservedShouldReturnTwo() {
 
         int result = solution(1, "1A");
+
+        assertThat(result, equalTo(2));
+    }
+
+    @Test
+    public void testOneRow_Seats1C_1A_ReservedShouldReturnTwo() {
+
+        int result = solution(1, "1C 1A");
 
         assertThat(result, equalTo(2));
     }
@@ -97,8 +107,8 @@ public class SeatReservationsTest {
     }
 
     @Test
-    public void testTwoRows_Seat1J_ReservedShouldReturnFive() {
-        int result = solution(2,"1J");
+    public void testTwoRows_Seat1J_1K_ReservedShouldReturnFive() {
+        int result = solution(2,"1K 1J");
 
         assertThat(result, equalTo(5));
     }
@@ -109,4 +119,40 @@ public class SeatReservationsTest {
 
         assertThat(result, equalTo(4));
     }
+
+    @Test
+    public void testThreeRows_Seat1A_2F_1C_3A_3C_3H_3K_ReservedShouldReturnFour() {
+        int result = solution(3,"1A 2F 1C 3A 3H 3C 3K");
+
+        assertThat(result, equalTo(5));
+    }
+
+    @Test
+    public void testOneRow_Seat1D_1G_ReservedShouldReturnTwo() {
+        int result = solution(1,"1D 1G");
+
+        assertThat(result, equalTo(2));
+    }
+
+    @Ignore
+    @Test (expected = CustomException.class)
+    public void testReservedSeatListContainsSeatNumberHigherThanRowsShouldReturnError() {
+        int result = solution(2, "1A 2A 3D");
+    }
+
+    @Ignore
+    @Test
+    public void testReservedSeatListHasInvalidSeatLocationThenShouldReturnError() {
+        int result = solution(1, "1Z");
+    }
+
+    @Ignore
+    @Test
+    public void testReservedSeatListHasValidAndInvalidSeatLocationsThenShouldReturnError() {
+        int result = solution(2, "1A 2F 2I");
+    }
+
+
+
 }
+
