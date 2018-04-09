@@ -174,5 +174,15 @@ public class SeatReservationsTest {
         assertThat(result,equalTo(5));
     }
 
+    @Test
+    public void testManyRows_ManySeats() {
+//        int result = solution(10, "1A 2B 3C 4D 5E 6F 7G 8H 9J 10K");
+        int result = solution(10, "10E");
+
+        assertThat(result, equalTo(29));
+    }
+
+//    2 2 2 3 2 2 3 2 2 2
+
 }
 
