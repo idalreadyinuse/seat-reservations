@@ -19,10 +19,14 @@ public class Solution {
         for (int x = 1; x <= rows; x++) {
 
             boolean block1Chkd = false;
+            boolean block2Chkd = false;
             boolean block3Chkd = false;
+            boolean seatDTaken = false;
+            boolean seatGTaken = false;
 
             for (String reservedSeat : reservedSeatsList) {
 
+                // Checks to see if any seats in group 1 (A-C) are reserved
                 for (int i = 0; i < GROUP_1.length; i++) {
                     if (!block1Chkd) {
                         if (reservedSeat.contains(GROUP_1[i]) && reservedSeat
@@ -33,13 +37,38 @@ public class Solution {
                         }
                     }
                 }
-                for (int i = 1; i <= 2; i++) {
-                    if (reservedSeat.contains(GROUP_2[i]) && reservedSeat
-                        .contains(Integer.toString(x))) {// Just looking for seat E or F
-                        availableGroups = availableGroups - 1;
-                        break;
+
+                // Checks to see if any seats in group 2 (D-G) are reserved
+                for (int i = 0; i <= GROUP_2.length; i++) {
+                    if (!block2Chkd) {
+                        // Checks for seat E or F - if either reserved then Group check is done
+                        if (reservedSeat.contains("E") && reservedSeat
+                            .contains(Integer.toString(x))
+                            || reservedSeat.contains("F") && reservedSeat
+                            .contains(Integer.toString(x))) {
+                            availableGroups = availableGroups - 1;
+                            block2Chkd = true;
+                            break;
+                        }
+
+                        // Checks to see if D & G are reserved
+                        if (reservedSeat.contains("D") && reservedSeat
+                            .contains(Integer.toString(x))) {
+                            seatDTaken = true;
+                        }
+                        if (reservedSeat.contains("G") && reservedSeat
+                            .contains(Integer.toString(x))) {
+                            seatGTaken = true;
+                        }
+                        // if both are reserved then Group check is done
+                        if (seatDTaken && seatGTaken) {
+                            availableGroups = availableGroups - 1;
+                            block2Chkd = true;
+                        }
                     }
                 }
+
+                // Checks to see if any seats in group 3 (H-K) are reserved
                 for (int i = 0; i < GROUP_3.length; i++) {
                     if (!block3Chkd) {
                         if (reservedSeat.contains(GROUP_3[i]) && reservedSeat
