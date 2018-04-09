@@ -1,6 +1,5 @@
 package main;
 
-import exceptions.CustomException;
 import java.util.Arrays;
 
 public class Solution {
@@ -16,23 +15,6 @@ public class Solution {
         String[] reservedSeatsList = reservedSeats.split(" ");
 
         Arrays.sort(reservedSeatsList);
-
-        String rowChecker = reservedSeatsList[reservedSeatsList.length - 1];
-
-        System.out.println("last seat reserved is: " + rowChecker);
-
-        int lastRow = Integer.parseInt(rowChecker.substring(0, (rowChecker.length() - 1)));
-
-        System.out.println("last row in list is: " + lastRow);
-
-        if (lastRow > rows) {
-            try {
-                throw new CustomException(
-                    "Reserved Seat list has seat reservation for a row higher than the number of rows passed in.");
-            } catch (CustomException e) {
-                System.out.println(e.getMessage());
-            }
-        }
 
         for (int x = 1; x <= rows; x++) {
 

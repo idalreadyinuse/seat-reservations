@@ -4,8 +4,6 @@ import static main.Solution.solution;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-import exceptions.CustomException;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class SeatReservationsTest {
@@ -133,25 +131,6 @@ public class SeatReservationsTest {
 
         assertThat(result, equalTo(2));
     }
-
-    @Ignore
-    @Test (expected = CustomException.class)
-    public void testReservedSeatListContainsSeatNumberHigherThanRowsShouldReturnError() {
-        int result = solution(2, "1A 2A 3D");
-    }
-
-    @Ignore
-    @Test
-    public void testReservedSeatListHasInvalidSeatLocationThenShouldReturnError() {
-        int result = solution(1, "1Z");
-    }
-
-    @Ignore
-    @Test
-    public void testReservedSeatListHasValidAndInvalidSeatLocationsThenShouldReturnError() {
-        int result = solution(2, "1A 2F 2I");
-    }
-
 
 
 }
