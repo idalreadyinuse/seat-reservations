@@ -1,14 +1,8 @@
 package main;
 
-import java.util.Arrays;
-
 public class Solution {
 
     public static int solution(int rows, String reservedSeats) {
-
-        final String[] GROUP_1 = {"A", "B", "C"};
-        final String[] GROUP_2 = {"D", "E", "F", "G"};
-        final String[] GROUP_3 = {"H", "J", "K"};
 
         int availableGroups = rows * 3;
 
@@ -26,36 +20,42 @@ public class Solution {
                 for (String reservedSeat : reservedSeatsList) {
 
                     String seatInRow = reservedSeat.substring(reservedSeat.length() - 1);
-                    int rowNumberAsInt = Integer.parseInt(reservedSeat.substring(0, reservedSeat.length() - 1));
+                    int rowNumberAsInt = Integer
+                        .parseInt(reservedSeat.substring(0, reservedSeat.length() - 1));
 
                     // Checks to see if any seats in group 1 (A-C) are reserved
-                    for (int i = 0; i < GROUP_1.length; i++) {
+                    if (x == rowNumberAsInt) {
                         if (!block1Chkd) {
-                            if (seatInRow.equals(GROUP_1[i]) && rowNumberAsInt == x) {
-                                availableGroups = availableGroups - 1;
-                                block1Chkd = true;
-                                break;
+                            switch (seatInRow) {
+                                case "A":
+                                case "B":
+                                case "C":
+                                    availableGroups = availableGroups - 1;
+                                    block1Chkd = true;
+                                    break;
+                                default:
+                                    break;
                             }
                         }
                     }
 
                     // Checks to see if any seats in group 2 (D-G) are reserved
-                    for (int i = 0; i <= GROUP_2.length; i++) {
+                    if (x == rowNumberAsInt) {
                         if (!block2Chkd) {
-                            // Checks for seat E or F - if either reserved then Group check is done
-                            if (seatInRow.equals("E") && rowNumberAsInt == x ||
-                                seatInRow.equals("F") && rowNumberAsInt == x) {
-                                availableGroups = availableGroups - 1;
-                                block2Chkd = true;
-                                break;
-                            }
-
-                            // Checks to see if D & G are reserved
-                            if (seatInRow.equals("D") && rowNumberAsInt == x) {
-                                seatDTaken = true;
-                            }
-                            if (seatInRow.equals("G") && rowNumberAsInt == x) {
-                                seatGTaken = true;
+                            switch (seatInRow) {
+                                case "E":
+                                case "F":
+                                    availableGroups = availableGroups - 1;
+                                    block2Chkd = true;
+                                    break;
+                                case "D":
+                                    seatDTaken = true;
+                                    break;
+                                case "G":
+                                    seatGTaken = true;
+                                    break;
+                                default:
+                                    break;
                             }
                             // if both are reserved then Group check is done
                             if (seatDTaken && seatGTaken) {
@@ -66,12 +66,17 @@ public class Solution {
                     }
 
                     // Checks to see if any seats in group 3 (H-K) are reserved
-                    for (int i = 0; i < GROUP_3.length; i++) {
+                    if (x == rowNumberAsInt) {
                         if (!block3Chkd) {
-                            if (seatInRow.equals(GROUP_3[i]) && rowNumberAsInt == x) {
-                                availableGroups = availableGroups - 1;
-                                block3Chkd = true;
-                                break;
+                            switch (seatInRow) {
+                                case "H":
+                                case "J":
+                                case "K":
+                                    availableGroups = availableGroups - 1;
+                                    block3Chkd = true;
+                                    break;
+                                default:
+                                    break;
                             }
                         }
                     }

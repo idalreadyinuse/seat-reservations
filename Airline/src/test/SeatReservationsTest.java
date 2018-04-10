@@ -176,13 +176,9 @@ public class SeatReservationsTest {
 
     @Test
     public void testManyRows_ManySeats() {
-//        int result = solution(10, "1A 2B 3C 4D 5E 6F 7G 8H 9J 10K");
-        int result = solution(10, "10E");
+        int result = solution(5, "3K 4E 1D 2A 1G");
 
-        assertThat(result, equalTo(29));
+        assertThat(result, equalTo(11));
     }
-
-//    2 2 2 3 2 2 3 2 2 2
-
 }
 
