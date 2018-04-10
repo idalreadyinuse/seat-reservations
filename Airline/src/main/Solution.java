@@ -11,9 +11,9 @@ public class Solution {
 
             for (int x = 1; x <= rows; x++) {
 
-                boolean block1Chkd = false;
-                boolean block2Chkd = false;
-                boolean block3Chkd = false;
+                boolean block1Chkd = false;     // Seats A B & C
+                boolean block2Chkd = false;     // Seats D E F & G
+                boolean block3Chkd = false;     // Seats H J K
                 boolean seatDTaken = false;
                 boolean seatGTaken = false;
 
@@ -23,60 +23,49 @@ public class Solution {
                     int rowNumberAsInt = Integer
                         .parseInt(reservedSeat.substring(0, reservedSeat.length() - 1));
 
-                    // Checks to see if any seats in group 1 (A-C) are reserved
                     if (x == rowNumberAsInt) {
-                        if (!block1Chkd) {
-                            switch (seatInRow) {
-                                case "A":
-                                case "B":
-                                case "C":
+                        switch (seatInRow) {
+                        // First block checks
+                            case "A":
+                            case "B":
+                            case "C":
+                                if (!block1Chkd) {
                                     availableGroups = availableGroups - 1;
                                     block1Chkd = true;
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                    }
-
-                    // Checks to see if any seats in group 2 (D-G) are reserved
-                    if (x == rowNumberAsInt) {
-                        if (!block2Chkd) {
-                            switch (seatInRow) {
-                                case "E":
-                                case "F":
+                                }
+                                break;
+                        // Second block checks
+                            case "D":
+                                seatDTaken = true;
+                                break;
+                            // If either E or F reserved then second block is not available
+                            case "E":
+                            case "F":
+                                if (!block2Chkd) {
                                     availableGroups = availableGroups - 1;
                                     block2Chkd = true;
-                                    break;
-                                case "D":
-                                    seatDTaken = true;
-                                    break;
-                                case "G":
-                                    seatGTaken = true;
-                                    break;
-                                default:
-                                    break;
-                            }
-                            // if both are reserved then Group check is done
-                            if (seatDTaken && seatGTaken) {
-                                availableGroups = availableGroups - 1;
-                                block2Chkd = true;
-                            }
-                        }
-                    }
-
-                    // Checks to see if any seats in group 3 (H-K) are reserved
-                    if (x == rowNumberAsInt) {
-                        if (!block3Chkd) {
-                            switch (seatInRow) {
-                                case "H":
-                                case "J":
-                                case "K":
+                                }
+                                break;
+                            case "G":
+                                seatGTaken = true;
+                                break;
+                        // Third block checks
+                            case "H":
+                            case "J":
+                            case "K":
+                                if (!block3Chkd) {
                                     availableGroups = availableGroups - 1;
                                     block3Chkd = true;
-                                    break;
-                                default:
-                                    break;
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                        // if both are seats D & G are reserved then second block is not available
+                        if (seatDTaken && seatGTaken) {
+                            if (!block3Chkd) {
+                                availableGroups = availableGroups - 1;
+                                block2Chkd = true;
                             }
                         }
                     }
